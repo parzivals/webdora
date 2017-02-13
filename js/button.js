@@ -2,12 +2,8 @@
 window.onload = init;
 
 function init(){
-  var btn1 = document.getElementById('button1');
+  var btn1 = document.getElementById('btn_apisend');
   btn1.onclick = button1_click;
-  var btn2 = document.getElementById('button2');
-  btn2.onclick = button2_click;
-  var btn3 = document.getElementById('button3');
-  btn3.onclick = button3_click;
 }
 
 

@@ -1,3 +1,14 @@
+
+window.onload = init;
+
+
+function init(){
+  var btn1 = document.getElementById('btn_apisend');
+  btn1.onclick = button1_click;
+}
+
+
+
 var BaeApi = function DoraApi(url, params) {
     var httpRequest;
     this.url = url;
