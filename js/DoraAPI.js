@@ -1,18 +1,7 @@
-
-window.onload = init;
-
-
-function init(){
-  var btn1 = document.getElementById('btn_apisend');
-  btn1.onclick = button1_click;
-}
-
-
-
-var BaeApi = function DoraApi(url, params) {
+var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
     var httpRequest;
-    this.url = url;
-    this.params = params;
+    var url = _Url;
+    var params = _Params;
     var ApiCall = function RequestAPI() {
         // var url = "http://apiDEV.doralab.co.kr/slp.auth.app";
         // var params = "&app_id=1000000003&os=android&client_uid=165bae977e1d63d89865d55b253fee6e70d62032";
@@ -40,8 +29,12 @@ var BaeApi = function DoraApi(url, params) {
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
                 var txt = httpRequest.responseText;
-                console.log(txt);
+                // console.log(txt);
                 //         //txt를 사용해서 알맞은 작업 수행
+                if (resultCallBack) {
+                    resultCallBack(txt);
+                }
+
             } else {
 
             }
@@ -51,6 +44,6 @@ var BaeApi = function DoraApi(url, params) {
 
     };
 
-return ApiCall;
+    return ApiCall;
 
 };

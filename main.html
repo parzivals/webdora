@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>웹페이지 제목</title>
+
+    <script type="text/javascript" src="js/ConstApi.js"></script>
+    <script type="text/javascript" src="js/ApiInfo.js"></script>
+    <script type="text/javascript" src="js/APIManager.js"></script>
+    <script type="text/javascript" src="js/AccountManager.js"></script>
+    <script type="text/javascript" src="js/DoraAPI.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+</head>
+
+<body>
+    <header></header>
+    <nav></nav>
+    <article id="default">
+        <section id="server">
+            <h1>API Default</h1>
+            <form>
+
+            <p>
+                <label for="serverurl">서버 선택 : </label>
+                <select id="serverurl">
+                  <option value="dev">DEV</option>
+                  <option value="live">LIVE</option>
+                </select>
+            </p>
+            <p>
+                <label for="app_id">App 선택 :</label>
+                <select id="app_id">
+                  <option value="1000000001">DEA</option>
+                  <option value="1000000003">LWD1</option>
+                  <option value="1000000004">LWD2</option>
+                  <option value="1000000005">LWD3</option>
+                </select>
+            </p>
+            <p>
+                <label for="os">OS 선택 :</label>
+                <select id="os">
+                  <option value="android">android</option>
+                  <option value="ios">ios</option>
+                </select>
+            </p>
+            <p>
+                <label for="c_ver">Ver 선택 :</label>
+                <select id="c_ver">
+                  <option value="2.5.1">2.5.1</option>
+                  <option value="2.5.0">2.5.0</option>
+                </select>
+            </p>
+            <p>
+                <label for="country">Country 선택 :</label>
+                <select id="country">
+                  <option value="country_kr">kr</option>
+                  <option value="country_en">en</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="language">Language 선택 :</label>
+                <select id="language">
+                  <option value="language_kr">kr</option>
+                  <option value="language_en">en</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="time_zone">time_zone 선택 :</label>
+                <select id="time_zone">
+                  <option value="Asia/Seoul">Asia/Seoul</option>
+                </select>
+            </p>
+          </form>
+        </section>
+
+        <section id="info">
+            <h1>API Info</h1>
+
+            <p>
+                <label for="apiurl">API 선택 :</label>
+                <select id="apiurl">
+                  <option value="login">login</option>
+                  <option value="questlist">questlist</option>
+                </select>
+            </p>
+
+            <textarea id="paramsarea" cols="60" rows="10" readonly="readonly" style="overflow-y:scroll">내용이 들어갑니다.</textarea>
+        </section>
+
+        <!-- <br /> -->
+        <section>
+            <button id="btn_apisend">API Send</button>
+        </section>
+        <!-- <br /> -->
+
+        <section id="log">
+            <h1>API LOG</h1>
+            <textarea id="logarea" cols="60" rows="20" readonly="readonly" style="overflow-y:scroll">내용이 들어갑니다.</textarea>
+        </section>
+    </article>
+</body>
+
+</html>
