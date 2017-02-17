@@ -1,5 +1,6 @@
 window.onload = Init;
 
+// dom 노드 가져와서 변수에 저장.
 var MainObjs = function() {
     var serverSelector = document.getElementById("serverurl");
     var appSelector = document.getElementById("app_id");
@@ -37,14 +38,15 @@ var MainObjs = function() {
     };
 };
 
+// 페이지 로드후 실행.
 function Init() {
     MainObjs = new MainObjs();
 
     var main = new Main();
 }
 
+// dom 노드 재구성 및 이벤트 연결.
 function Main() {
-
     MainObjs.serverSelector.innerHTML = '';
     AddSelectorOptions(MainObjs.serverSelector, Server.DIC);
 
@@ -84,6 +86,7 @@ function Main() {
 
     RefreshAPIInfo();
 
+    // 자식 노드 구성.
     function AddSelectorOptions(parentObj, dicObj) {
         var op;
         var opText;
@@ -111,6 +114,7 @@ function Main() {
     }
 }
 
+// dom 노드 리프레시
 function RefreshAPIInfo() {
 
     var serverValue = MainObjs.serverSelector.value;
@@ -136,32 +140,28 @@ function RefreshAPIInfo() {
 
     MainObjs.apiInfo = APIManager.GetAPIDIC()[MainObjs.apiSelector.value];
     var apiInfo = MainObjs.apiInfo ;
-    var ary = apiInfo.requestParams;
+    var ary = apiInfo.requestParamsAry;
     var paramsText = "";
     paramsText += "APIURL : " + APIManager.GetServerUrl() + apiInfo.apiUrl + "\r\n";
 
     for (var i = 0; i < ary.length; i++) {
         var key = ary[i];
         paramsText += key + " : " + AccountManager.GetAPIDIC()[key]() + "\r\n";
-        apiInfo.postParams += "&" + key + "=" + AccountManager.GetAPIDIC()[key]() ;
     }
 
-    console.log( apiInfo.postParams );
     MainObjs.paramsArea.innerText = paramsText;
 
     if (event.stopPropagation) event.stopPropagation(); //MOZILLA
     else event.cancelBubble = true;
 }
 
+// API 호출.
 function RequestAPI(){
-  var apiInfo = MainObjs.apiInfo ;
-  // var resultCallBack = new ResultCallBack();
-  var baeApi = new BaeApi( ( APIManager.GetServerUrl() + apiInfo.apiUrl ), apiInfo.postParams, ResultCallBack );
-  baeApi();
+  MainObjs.apiInfo.RequestAPI( ResultCallBack );
 }
 
+// API 결과
 function ResultCallBack( txt ) {
-
   var textNode = document.createTextNode( txt + "\r\n" );
   MainObjs.logArea.appendChild(textNode) ;
 

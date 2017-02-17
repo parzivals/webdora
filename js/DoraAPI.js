@@ -1,4 +1,6 @@
 var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
+  console.log(_Url);
+  console.log(_Params);
     var httpRequest;
     var url = _Url;
     var params = _Params;
@@ -19,17 +21,18 @@ var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
         }
 
         httpRequest.open("POST", url, true);
-        httpRequest.onreadystatechange = callBack;
+        // httpRequest.setRequestHeader("Content-Type", "text/html;charset=utf-8");
         httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        //-----------------------------------------------------
-        httpRequest.send(params);
+        httpRequest.onreadystatechange = callBack;
+
+        httpRequest.send( params);
     };
 
     var callBack = function callbackFunction() {
         if (httpRequest.readyState == 4) {
             if (httpRequest.status == 200) {
                 var txt = httpRequest.responseText;
-                // console.log(txt);
+                console.log(txt);
                 //         //txt를 사용해서 알맞은 작업 수행
                 if (resultCallBack) {
                     resultCallBack(txt);
