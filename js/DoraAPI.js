@@ -1,6 +1,5 @@
 var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
-  console.log(_Url);
-  console.log(_Params);
+
     var httpRequest;
     var url = _Url;
     var params = _Params;
@@ -34,7 +33,7 @@ var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
                 var txt = httpRequest.responseText;
                 console.log(txt);
                 //         //txt를 사용해서 알맞은 작업 수행
-                if (resultCallBack) {
+                if ( typeof resultCallBack === 'function' ) {
                     resultCallBack(txt);
                 }
 

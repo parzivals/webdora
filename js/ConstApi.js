@@ -116,6 +116,17 @@ var seoul = "Asia/Seoul";
   };
 })();
 
+var ApiState = (function () {
+  var Ready = "Ready";
+  var Running = "Running";
+  var Finish = "Finish";
+
+  return{
+    Ready:Ready,
+    Running:Running,
+    Finish:Finish
+  };
+})();
 
 var PlatformAPIURL = (function() {
     var constCHECK_SIGNUP_PATH = "slp.user.account.chk.signup.path";

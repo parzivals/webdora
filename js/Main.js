@@ -40,6 +40,7 @@ var MainObjs = function() {
 
 // 페이지 로드후 실행.
 function Init() {
+  // AccountManager.ClearData();
     MainObjs = new MainObjs();
 
     var main = new Main();
@@ -73,6 +74,7 @@ function Main() {
 
     MainObjs.logArea.innerText = '';
 
+    // 이벤트 연결.
     MainObjs.serverSelector.onchange = RefreshAPIInfo;
     MainObjs.appSelector.onchange = RefreshAPIInfo;
     MainObjs.osSelector.onchange = RefreshAPIInfo;
@@ -84,16 +86,16 @@ function Main() {
 
     MainObjs.sendAPI.onclick = RequestAPI;
 
+    // dom 노드 리프레시
     RefreshAPIInfo();
 
-    // 자식 노드 구성.
+    // select 구성.
     function AddSelectorOptions(parentObj, dicObj) {
         var op;
         var opText;
 
         if (!Array.isArray(dicObj)) {
             for (var key in dicObj) {
-                //  console.log("key : " + key +", value : " + dicObj[key]);
                 op = document.createElement("option");
                 opText = document.createTextNode(key);
                 op.setAttribute("value", key);
@@ -102,7 +104,6 @@ function Main() {
             }
         } else {
             for (var i = 0; i < dicObj.length; i++) {
-                //  console.log("key : " + key +", value : " + dicObj[key]);
                 op = document.createElement("option");
                 opText = document.createTextNode(dicObj[i]);
                 op.setAttribute("value", dicObj[i]);
@@ -110,13 +111,16 @@ function Main() {
                 parentObj.appendChild(op);
             }
         }
-        // console.log(parentObj);
     }
 }
 
 // dom 노드 리프레시
 function RefreshAPIInfo() {
 
+      if (event.stopPropagation) event.stopPropagation(); //MOZILLA
+      else event.cancelBubble = true;
+
+    // 현재 api 상태 저장.
     var serverValue = MainObjs.serverSelector.value;
     APIManager.SetServerURL(Server.DIC[serverValue]);
 
@@ -138,6 +142,7 @@ function RefreshAPIInfo() {
     var timeZoneValue = MainObjs.timezoneSelector.value;
     AccountManager.SetTimeZone(timeZoneValue);
 
+    // url, 파라미터 출력.
     MainObjs.apiInfo = APIManager.GetAPIDIC()[MainObjs.apiSelector.value];
     var apiInfo = MainObjs.apiInfo ;
     var ary = apiInfo.requestParamsAry;
@@ -150,14 +155,14 @@ function RefreshAPIInfo() {
     }
 
     MainObjs.paramsArea.innerText = paramsText;
-
-    if (event.stopPropagation) event.stopPropagation(); //MOZILLA
-    else event.cancelBubble = true;
 }
 
 // API 호출.
 function RequestAPI(){
-  MainObjs.apiInfo.RequestAPI( ResultCallBack );
+  // MainObjs.apiInfo.RequestAPI( ResultCallBack );
+  console.log( "RequestAPI");
+  var flow = new FlowAPICallController();
+  // FlowAPICallController();
 }
 
 // API 결과

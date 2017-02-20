@@ -5,7 +5,8 @@ function ApiInfo() {
     var requestValue = "";
     var resultValue = "";
 
-    var resultCallBack;
+    var state = ApiState.Ready;
+
 
     function GetAPIUrl() {
       return APIManager.GetServerUrl() + this.apiUrl ;
@@ -34,24 +35,18 @@ function ApiInfo() {
 
     // API 호출.
     function RequestAPI( fCallBack ){
-
-      this.resultCallBack = null;
-      if ( typeof fCallBack === 'function' ) {
-          this.resultCallBack = fCallBack;
-      }
-
       var baeApi = new BaeApi( this.GetAPIUrl() , this.GetRequestValue(), APIResultCallBack );
       baeApi();
+
+          // API 결과
+          function APIResultCallBack( txt ) {
+              this.resultValue = txt;
+              if ( typeof fCallBack === 'function' ) {
+                   fCallBack( this.resultValue );
+              }
+          }
     }
 
-    // API 결과
-    function APIResultCallBack( txt ) {
-      var apiInfo = MainObjs.apiInfo ;
-      apiInfo.resultValue = txt;
-        if ( typeof apiInfo.resultCallBack === 'function' ) {
-             apiInfo.resultCallBack( apiInfo.resultValue );
-        }
-    }
 
     return{
       apiUrl:apiUrl,
@@ -60,13 +55,14 @@ function ApiInfo() {
       requestValue:requestValue,
       resultValue:resultValue,
 
+      ApiState:state,
+
       GetAPIUrl:GetAPIUrl,
       GetRequestValue:GetRequestValue,
       GetResultValue:GetResultValue,
 
-      RequestAPI:RequestAPI,
+      RequestAPI:RequestAPI
 
-      resultCallBack:resultCallBack
     };
 }
 

@@ -41,6 +41,11 @@ var APIManager = (function() {
 
         SetServerURL: function(_ServerUrl) {
             server_URL = _ServerUrl;
-        }
+        },
+
+        CheckAppVer: checkAppVer,
+        SignupPath: signup_path,
+        SignUp: signup,
+        Login: login
     };
 })();
