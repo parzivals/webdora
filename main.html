@@ -5,106 +5,164 @@
     <meta charset="utf-8">
     <title>웹페이지 제목</title>
     <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-    <header></header>
-    <nav></nav>
-    <article id="default">
-        <section id="server">
-            <h1>API Default</h1>
-            <form>
+    <header>
+        <nav class="top-nav">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a class="brand-logo center">Dora API</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-            <p>
-                <label for="serverurl">서버 선택 : </label>
-                <select id="serverurl">
-                  <option value="dev">DEV</option>
-                  <option value="live">LIVE</option>
-                </select>
-            </p>
-            <p>
-                <label for="app_id">App 선택 :</label>
-                <select id="app_id">
-                  <option value="1000000001">DEA</option>
-                  <option value="1000000003">LWD1</option>
-                  <option value="1000000004">LWD2</option>
-                  <option value="1000000005">LWD3</option>
-                </select>
-            </p>
-            <p>
-                <label for="os">OS 선택 :</label>
-                <select id="os">
-                  <option value="android">android</option>
-                  <option value="ios">ios</option>
-                </select>
-            </p>
-            <p>
-                <label for="c_ver">Ver 선택 :</label>
-                <select id="c_ver">
-                  <option value="2.5.1">2.5.1</option>
-                  <option value="2.5.0">2.5.0</option>
-                </select>
-            </p>
-            <p>
-                <label for="country">Country 선택 :</label>
-                <select id="country">
-                  <option value="country_kr">kr</option>
-                  <option value="country_en">en</option>
-                </select>
-            </p>
+    <div class="container">
+        <h3>API Setting</h3>
+        <form class="col s12">
+            <div class="row">
+                <div class="col s3">
+                    <label for="serverurl">서버 선택 :</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="serverurl" class="browser-default">
+                          <option value="dev">DEV</option>
+                          <option value="live">LIVE</option>
+                        </select>
+                </div>
+            </div>
 
-            <p>
-                <label for="language">Language 선택 :</label>
-                <select id="language">
-                  <option value="language_kr">kr</option>
-                  <option value="language_en">en</option>
-                </select>
-            </p>
+            <div class="row">
+                <div class="col s3">
+                    <label for="app_id">App 선택 :</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="app_id" class="browser-default">
+                        <option value="1000000001">DEA</option>
+                        <option value="1000000003">LWD1</option>
+                        <option value="1000000004">LWD2</option>
+                        <option value="1000000005">LWD3</option>
+                      </select>
+                </div>
+            </div>
 
-            <p>
-                <label for="time_zone">time_zone 선택 :</label>
-                <select id="time_zone">
-                  <option value="Asia/Seoul">Asia/Seoul</option>
-                </select>
-            </p>
-          </form>
-        </section>
+            <div class="row">
+                <div class="col s3">
+                    <label for="os">OS 선택 :</label>
+                </div>
+                <div class="col s4">
+                    <select id="os" class="browser-default">
+                          <option value="android">android</option>
+                          <option value="ios">ios</option>
+                        </select>
+                </div>
+            </div>
 
-        <section id="info">
-            <h1>API Info</h1>
+            <div class="row">
+                <div class="col s3">
+                    <label for="c_ver">Ver 선택 :</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="c_ver" class="browser-default">
+                        <option value="2.5.1">2.5.1</option>
+                        <option value="2.5.0">2.5.0</option>
+                      </select>
+                </div>
+            </div>
 
-            <p>
-                <label for="apiurl">API 선택 :</label>
-                <select id="apiurl">
-                  <option value="login">login</option>
-                  <option value="questlist">questlist</option>
-                </select>
-            </p>
+            <div class="row">
+                <div class="col s3">
+                    <label for="country">Country 선택 :</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="country" class="browser-default">
+                        <option value="country_kr">kr</option>
+                        <option value="country_en">en</option>
+                      </select>
+                </div>
+            </div>
 
-            <textarea id="paramsarea" cols="60" rows="10" readonly="readonly" style="overflow-y:scroll">내용이 들어갑니다.</textarea>
-        </section>
+            <div class="row">
+                <div class="col s3">
+                    <label for="language">Language 선택 :</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="language" class="browser-default">
+                        <option value="language_kr">kr</option>
+                        <option value="language_en">en</option>
+                      </select>
+                </div>
+            </div>
 
-        <!-- <br /> -->
-        <section>
-            <button id="btn_apisend">API Send</button>
-        </section>
-        <!-- <br /> -->
+            <div class="row">
+                <div class="col s3">
+                    <label for="time_zone">time_zone 선택 :</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="time_zone" class="browser-default">
+                      <option value="Asia/Seoul">Asia/Seoul</option>
+                    </select>
+                </div>
+            </div>
 
-        <section id="log">
-            <h1>API LOG</h1>
-            <textarea id="logarea" cols="60" rows="20" readonly="readonly" style="overflow-y:scroll">내용이 들어갑니다.</textarea>
-        </section>
-    </article>
+            <div class="row">
+                <div class="col s3">
+                    <label for="email">eMail ID :</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="email" class="browser-default">
+                      <option value="guest">Guest</option>
+                      <option value="email">Email</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s3">
+                    <label for="password">비밀번호 :</label>
+                </div>
+                <div class="input-field col s4">
+                  <input placeholder="비밀번호 입력" id="password" type="text" class="validate">
+                </div>
+            </div>
+        </form>
+
+        <div class="card" id="paramsarea">
+        </div>
+
+        <h3>API Menu</h3>
+        <button id="btn_apisend" class="waves-effect waves-light btn-large">Login <i class="material-icons right">send</i></button>
+
+        <h3>API LOG</h3>
+        <div class="card" id="logarea">
+        </div>
+
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">spellcheck</i>Check Signup Path</div>
+                <div class="collapsible-body"><span>result log</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">mode_edit</i>Sign Up</div>
+                <div class="collapsible-body"><span>result log</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">perm_identity</i>Sign In</div>
+                <div class="collapsible-body"><span>result log</span></div>
+            </li>
+        </ul>
+    </div>
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
-    
+
     <script type="text/javascript" src="js/ConstApi.js"></script>
     <script type="text/javascript" src="js/ApiInfo.js"></script>
     <script type="text/javascript" src="js/APIManager.js"></script>
