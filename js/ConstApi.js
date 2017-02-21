@@ -93,6 +93,29 @@ var Locale = (function() {
     };
 })();
 
+
+var TimeZone = (function () {
+  var aryObj = [
+    "Asia/Seoul"
+  ];
+
+  return{
+    ARRY:aryObj
+  };
+})();
+
+var LoginType = (function() {
+  var dicObj ={
+    Guest:"Guest",
+    Email:"Email"
+  };
+    return {
+      DIC:dicObj
+      // Guest:Guest,
+      // Email:Email
+    };
+})();
+
 var SignupPath = (function() {
     var slp = "slp";
     var google = "google";
@@ -102,18 +125,6 @@ var SignupPath = (function() {
         GOOGLE: google,
         FACEBOOK: facebook
     };
-})();
-
-var TimeZone = (function () {
-  var aryObj = [
-    "Asia/Seoul"
-  ];
-var seoul = "Asia/Seoul";
-
-  return{
-    ARRY:aryObj,
-    SEOUL:seoul
-  };
 })();
 
 var ApiState = (function () {

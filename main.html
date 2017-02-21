@@ -7,9 +7,12 @@
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link id="login_link" rel="import" href="login.html">
+    <link id="signup_link" rel="import" href="signup.html">
+    <!-- <link id="signup_page" rel="import" href="login.html"> -->
 </head>
 
 <body>
@@ -24,144 +27,133 @@
     </header>
 
     <div class="container">
-        <h3>API Setting</h3>
         <form class="col s12">
             <div class="row">
-                <div class="col s3">
-                    <label for="serverurl">서버 선택 :</label>
-                </div>
-                <div class="input-field col s4">
-                    <select id="serverurl" class="browser-default">
-                          <option value="dev">DEV</option>
-                          <option value="live">LIVE</option>
-                        </select>
-                </div>
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header active"><i class="material-icons">filter_drama</i>API Setting</div>
+                        <div class="collapsible-body">
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="serverurl">
+                                      <option value="dev">DEV</option>
+                                      <option value="live">LIVE</option>
+                                    </select>
+                                    <label for="serverurl">서버</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="app_id">
+                                      <option value="1000000001">DEA</option>
+                                      <option value="1000000003">LWD1</option>
+                                      <option value="1000000004">LWD2</option>
+                                      <option value="1000000005">LWD3</option>
+                                    </select>
+                                    <label for="app_id">App 선택 :</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="os">
+                                      <option value="android">android</option>
+                                      <option value="ios">ios</option>
+                                    </select>
+                                    <label for="os">OS 선택 :</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="c_ver">
+                                      <option value="2.5.1">2.5.1</option>
+                                      <option value="2.5.0">2.5.0</option>
+                                    </select>
+                                    <label for="c_ver">Ver 선택 :</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="country">
+                                      <option value="country_kr">kr</option>
+                                      <option value="country_en">en</option>
+                                    </select>
+                                    <label for="country">Country 선택 :</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="language">
+                                      <option value="language_kr">kr</option>
+                                      <option value="language_en">en</option>
+                                    </select>
+                                    <label for="language">Language 선택 :</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="time_zone">
+                                      <option value="Asia/Seoul">Asia/Seoul</option>
+                                    </select>
+                                    <label for="time_zone">time_zone 선택 :</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <select id="login_type">
+                                      <option value="Guest">Guest</option>
+                                      <option value="Email">Email</option>
+                                    </select>
+                                    <label for="login_type">로그인 선택 :</label>
+                                </div>
+                            </div>
+
+                            <div class="row" id="login_input">
+                                <div class="input-field col s4">
+                                    <input placeholder="이메일 아이디" id="email" type="text" class="validate">
+                                    <label class="active" for="email">Email ID :</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input placeholder="비밀번호 6자리 이상" id="password" type="text" class="validate">
+                                    <label class="active" for="password">비밀번호 :</label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
-            <div class="row">
-                <div class="col s3">
-                    <label for="app_id">App 선택 :</label>
-                </div>
-                <div class="input-field col s4">
-                    <select id="app_id" class="browser-default">
-                        <option value="1000000001">DEA</option>
-                        <option value="1000000003">LWD1</option>
-                        <option value="1000000004">LWD2</option>
-                        <option value="1000000005">LWD3</option>
-                      </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s3">
-                    <label for="os">OS 선택 :</label>
-                </div>
-                <div class="col s4">
-                    <select id="os" class="browser-default">
-                          <option value="android">android</option>
-                          <option value="ios">ios</option>
-                        </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s3">
-                    <label for="c_ver">Ver 선택 :</label>
-                </div>
-                <div class="input-field col s4">
-                    <select id="c_ver" class="browser-default">
-                        <option value="2.5.1">2.5.1</option>
-                        <option value="2.5.0">2.5.0</option>
-                      </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s3">
-                    <label for="country">Country 선택 :</label>
-                </div>
-                <div class="input-field col s4">
-                    <select id="country" class="browser-default">
-                        <option value="country_kr">kr</option>
-                        <option value="country_en">en</option>
-                      </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s3">
-                    <label for="language">Language 선택 :</label>
-                </div>
-                <div class="input-field col s4">
-                    <select id="language" class="browser-default">
-                        <option value="language_kr">kr</option>
-                        <option value="language_en">en</option>
-                      </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s3">
-                    <label for="time_zone">time_zone 선택 :</label>
-                </div>
-                <div class="input-field col s4">
-                    <select id="time_zone" class="browser-default">
-                      <option value="Asia/Seoul">Asia/Seoul</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s3">
-                    <label for="email">eMail ID :</label>
-                </div>
-                <div class="input-field col s4">
-                    <select id="email" class="browser-default">
-                      <option value="guest">Guest</option>
-                      <option value="email">Email</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col s3">
-                    <label for="password">비밀번호 :</label>
-                </div>
-                <div class="input-field col s4">
-                  <input placeholder="비밀번호 입력" id="password" type="text" class="validate">
-                </div>
-            </div>
         </form>
 
-        <div class="card" id="paramsarea">
+        <div class="row">
+            <div class="col s12">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#login_tab">login</a></li>
+                    <li class="tab col s3"><a href="#signup_tab">Sign Up</a></li>
+                    <!-- <li class="tab col s3"><a href="#test3">Disabled Tab</a></li>
+                    <li class="tab col s3"><a href="#test4">Test 4</a></li> -->
+                </ul>
+            </div>
+
+            <div id="login_tab" class="col s12">
+            </div>
+            <div id="signup_tab" class="col s12">
+            </div>
+            <!-- <div id="test3" class="col s12">Test 3</div>
+            <div id="test4" class="col s12">Test 4</div> -->
         </div>
-
-        <h3>API Menu</h3>
-        <button id="btn_apisend" class="waves-effect waves-light btn-large">Login <i class="material-icons right">send</i></button>
-
-        <h3>API LOG</h3>
-        <div class="card" id="logarea">
-        </div>
-
-        <ul class="collapsible" data-collapsible="accordion">
-            <li>
-                <div class="collapsible-header"><i class="material-icons">spellcheck</i>Check Signup Path</div>
-                <div class="collapsible-body"><span>result log</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">mode_edit</i>Sign Up</div>
-                <div class="collapsible-body"><span>result log</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">perm_identity</i>Sign In</div>
-                <div class="collapsible-body"><span>result log</span></div>
-            </li>
-        </ul>
     </div>
+
+
 
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.js"></script>
 
     <script type="text/javascript" src="js/ConstApi.js"></script>
     <script type="text/javascript" src="js/ApiInfo.js"></script>
@@ -170,6 +162,15 @@
     <script type="text/javascript" src="js/DoraAPI.js"></script>
     <script type="text/javascript" src="js/APIFlowController.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/signup.js"></script>
+
+    <script type="text/javascript">
+        // select 태그 초기화.
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+    </script>
 </body>
 
 </html>

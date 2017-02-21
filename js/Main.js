@@ -9,15 +9,12 @@ var MainObjs = function() {
     var countrySelector = document.getElementById("country");
     var languageSelector = document.getElementById("language");
     var timezoneSelector = document.getElementById("time_zone");
-    var apiSelector = document.getElementById("apiurl");
 
-    var paramsArea = document.getElementById('paramsarea');
+    var loginTypeSelector = document.getElementById("login_type");
 
-    var sendAPI = document.getElementById('btn_apisend');
-
-    var logArea = document.getElementById('logarea');
-
-    var apiInfo;
+    var loginInput = document.getElementById("login_input");
+    var emailInput = document.getElementById("email");
+    var passwordInput = document.getElementById("password");
 
     return {
         serverSelector: serverSelector,
@@ -27,21 +24,22 @@ var MainObjs = function() {
         countrySelector: countrySelector,
         languageSelector: languageSelector,
         timezoneSelector: timezoneSelector,
-        apiSelector: apiSelector,
+        loginTypeSelector:loginTypeSelector,
 
-        sendAPI: sendAPI,
+        loginInput:loginInput,
+        emailInput:emailInput,
+        passwordInput:passwordInput,
 
-        paramsArea: paramsArea,
-        logArea: logArea,
-
-        apiInfo:apiInfo
     };
 };
 
 // 페이지 로드후 실행.
 function Init() {
   // AccountManager.ClearData();
+
     MainObjs = new MainObjs();
+    LoginObjs = new LoginObjs();
+    SignupObjs = new SignupObjs();
 
     var main = new Main();
 }
@@ -69,10 +67,8 @@ function Main() {
     MainObjs.timezoneSelector.innerHTML = '';
     AddSelectorOptions(MainObjs.timezoneSelector, TimeZone.ARRY);
 
-    MainObjs.apiSelector.innerHTML = '';
-    AddSelectorOptions(MainObjs.apiSelector, APIManager.GetAPIDIC());
-
-    MainObjs.logArea.innerText = '';
+    MainObjs.loginTypeSelector.innerHTML = '';
+    AddSelectorOptions(MainObjs.loginTypeSelector, LoginType.DIC);
 
     // 이벤트 연결.
     MainObjs.serverSelector.onchange = RefreshAPIInfo;
@@ -82,9 +78,12 @@ function Main() {
     MainObjs.countrySelector.onchange = RefreshAPIInfo;
     MainObjs.languageSelector.onchange = RefreshAPIInfo;
     MainObjs.timezoneSelector.onchange = RefreshAPIInfo;
-    MainObjs.apiSelector.onchange = RefreshAPIInfo;
+    MainObjs.loginTypeSelector.onchange = RefreshAPIInfo;
 
-    MainObjs.sendAPI.onclick = RequestAPI;
+    MainObjs.emailInput.onchange = RefreshAPIInfo;
+    MainObjs.passwordInput.onchange = RefreshAPIInfo;
+
+    LoginObjs.loginBtn.onclick = RequestAPI;
 
     // dom 노드 리프레시
     RefreshAPIInfo();
@@ -142,32 +141,39 @@ function RefreshAPIInfo() {
     var timeZoneValue = MainObjs.timezoneSelector.value;
     AccountManager.SetTimeZone(timeZoneValue);
 
-    // url, 파라미터 출력.
-    MainObjs.apiInfo = APIManager.GetAPIDIC()[MainObjs.apiSelector.value];
-    var apiInfo = MainObjs.apiInfo ;
-    var ary = apiInfo.requestParamsAry;
-    var paramsText = "";
-    paramsText += "APIURL : " + APIManager.GetServerUrl() + apiInfo.apiUrl + "\r\n";
+    var loginTypeValue = MainObjs.loginTypeSelector.value;
+    AccountManager.SetLoginType(loginTypeValue);
 
-    for (var i = 0; i < ary.length; i++) {
-        var key = ary[i];
-        paramsText += key + " : " + AccountManager.GetAPIDIC()[key]() + "\r\n";
+    if ( loginTypeValue === LoginType.DIC.Guest) {
+      $(MainObjs.loginInput).hide();
+    }
+    else {
+      // AccountManager.SetEMail(eMailIdValue);
+      $(MainObjs.loginInput).show();
+      MainObjs.emailInput.value = AccountManager.GetEMail();
+      MainObjs.passwordInput.value = AccountManager.GetPassWord();
     }
 
-    MainObjs.paramsArea.innerText = paramsText;
+    // url, 파라미터 출력.
+    // MainObjs.apiInfo = APIManager.GetAPIDIC()[MainObjs.apiSelector.value];
+    // var apiInfo = MainObjs.apiInfo ;
+    // var ary = apiInfo.requestParamsAry;
+    // var paramsText = "";
+    // paramsText += "APIURL : " + APIManager.GetServerUrl() + apiInfo.apiUrl + "\r\n";
+    //
+    // for (var i = 0; i < ary.length; i++) {
+    //     var key = ary[i];
+    //     paramsText += key + " : " + AccountManager.GetAPIDIC()[key]() + "\r\n";
+    // }
+    //
+    // MainObjs.paramsArea.innerText = paramsText;
+
 }
 
 // API 호출.
 function RequestAPI(){
   // MainObjs.apiInfo.RequestAPI( ResultCallBack );
-  console.log( "RequestAPI");
+  
   var flow = new FlowAPICallController();
   // FlowAPICallController();
-}
-
-// API 결과
-function ResultCallBack( txt ) {
-  var textNode = document.createTextNode( txt + "\r\n" );
-  MainObjs.logArea.appendChild(textNode) ;
-
 }

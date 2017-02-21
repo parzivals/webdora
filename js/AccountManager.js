@@ -5,8 +5,10 @@ var AccountManager = (function() {
     var country = localStorage.getItem("country");
     var language = localStorage.getItem("language");
     var time_zone = localStorage.getItem("time_zone");
+    var login_type = localStorage.getItem("login_type");
 
     var client_uid = localStorage.getItem("client_uid");
+    var guestid = localStorage.getItem("guestid");
     var email = localStorage.getItem("email");
     var password = localStorage.getItem("password");
     var signup_path = localStorage.getItem("signup_path");
@@ -55,12 +57,22 @@ var AccountManager = (function() {
         return time_zone;
     }
 
+    function GetLoginType() {
+        login_type = localStorage.getItem("login_type");
+        return login_type;
+    }
+
     function GetClientUid() {
         if (!client_uid) {
             var reset = new ResetClientUid();
         }
         client_uid = localStorage.getItem("client_uid");
         return client_uid;
+    }
+
+    function GetGuestID() {
+        guestid = localStorage.getItem("guestid");
+        return guestid;
     }
 
     function GetEMail() {
@@ -95,7 +107,10 @@ var AccountManager = (function() {
         country: GetCountry,
         language: GetLanguage,
         time_zone: GetTimeZone,
+        login_type: login_type,
+
         client_uid: GetClientUid,
+        guestid: GetGuestID,
         email: GetEMail,
         password: GetPassWord,
         signup_path: GetSignupPath,
@@ -146,8 +161,16 @@ var AccountManager = (function() {
             localStorage.setItem("time_zone", _TimeZone);
             time_zone = localStorage.getItem("time_zone");
         },
+        SetLoginType: function(_LoginType) {
+            localStorage.setItem("login_type", _LoginType);
+            login_type = localStorage.getItem("login_type");
+        },
 
         ResetClientUid: ResetClientUid,
+        SetGuestID: function(_Guestid) {
+            localStorage.setItem("guestid", _Guestid);
+            guestid = localStorage.getItem("guestid");
+        },
         SetEMail: function(_email) {
             localStorage.setItem("email", _email);
             email = localStorage.getItem("email");
@@ -182,8 +205,10 @@ var AccountManager = (function() {
             country = localStorage.getItem("country");
             language = localStorage.getItem("language");
             time_zone = localStorage.getItem("time_zone");
+            login_type = localStorage.getItem("login_type");
 
             client_uid = localStorage.getItem("client_uid");
+            guestid = localStorage.getItem("guestid");
             email = localStorage.getItem("email");
             password = localStorage.getItem("password");
             signup_path = localStorage.getItem("signup_path");
