@@ -1,77 +1,37 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
-    <meta charset="utf-8">
-    <title>웹페이지 제목</title>
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-
 <body>
-    <div class="container">
-
-        <div id="signup_page" class="col s12">
-          <div class="row" id="signup_input">
-              <div class="input-field col s4 inline">
-                  <input id="new_email" type="text" class="validate">
-                      <label for="new_email">Email ID :</label>
-              </div>
-              <div class="input-field col s4 inline">
-                  <input id="new_password" type="text" class="validate">
-                      <label for="new_password">비밀번호 :</label>
-              </div>
-          </div>
-          <a class="card waves-effect waves-light btn" id="singup_btn"><i class="material-icons left">play_arrow</i>Sign Up</a>
-          <ul class="collapsible" data-collapsible="accordion">
-              <li>
-                  <div class="collapsible-header waves-effect" id="logout_proc">
-                      <i class="material-icons">spellcheck</i>Log Out
-                      <i class="material-icons right">visibility</i>
-                  </div>
-                  <div class="collapsible-body"><span id="logout_log">result log</span></div>
-              </li>
-              <li>
-                  <div class="collapsible-header waves-effect">
-                      <i class="material-icons">spellcheck</i>Check Signup Path
-                      <i class="material-icons right">visibility</i>
-                  </div>
-                  <div class="collapsible-body"><span>result log</span></div>
-              </li>
-              <li>
-                  <div class="collapsible-header">
-                      <i class="material-icons">mode_edit</i>Guest LogIn
-                      <i class="material-icons right">visibility</i>
-                  </div>
-                  <div class="collapsible-body"><span>result log</span></div>
-              </li>
-              <li>
-                  <div class="collapsible-header">
-                      <i class="material-icons">mode_edit</i>Sign Up
-                      <i class="material-icons right">visibility</i>
-                  </div>
-                  <div class="collapsible-body"><span>result log</span></div>
-              </li>
-              <li>
-                  <div class="collapsible-header">
-                      <i class="material-icons">perm_identity</i>Sign In
-                      <i class="material-icons right">visibility</i>
-                  </div>
-                  <div class="collapsible-body"><span>result log</span></div>
-              </li>
-          </ul>
+    <div id="signup_page" class="col s12">
+        <div class="row" id="signup_input">
+            <div class="input-field col s4 inline">
+                <input id="new_email" type="text" class="validate">
+                <label for="new_email">Email ID :</label>
+            </div>
+            <div class="input-field col s4 inline">
+                <input id="new_password" type="text" class="validate">
+                <label for="new_password">비밀번호 :</label>
+            </div>
         </div>
-
+        <a class="card waves-effect waves-light btn" id="signup_btn"><i class="material-icons left">play_arrow</i>Sign Up</a>
+        <ul class="collapsible" data-collapsible="expandable">
+            <li>
+                <div class="collapsible-header waves-effect" id="transition_proc">
+                    <i class="material-icons">mode_edit</i>회원등록(Guest의 Email, PassWord 수정)
+                    <i class="material-icons right">info</i>
+                </div>
+                <div class="collapsible-body"><span id="transition_log">result log</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header" id="signin_proc">
+                    <i class="material-icons">perm_identity</i>Sign In
+                    <i class="material-icons right">info</i>
+                </div>
+                <div class="collapsible-body"><span id="signin_log">result log</span></div>
+            </li>
+        </ul>
     </div>
-    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.js"></script>
-    <script type="text/javascript">
-        // select 태그 초기화.
-        $(document).ready(function() {
-            $('select').material_select();
-        });
-    </script> -->
+
 </body>
 
 </html>

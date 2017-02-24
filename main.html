@@ -3,16 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>웹페이지 제목</title>
+    <title>도라 API 테스트</title>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link id="login_link" rel="import" href="login.html">
-    <link id="signup_link" rel="import" href="signup.html">
-    <!-- <link id="signup_page" rel="import" href="login.html"> -->
 </head>
 
 <body>
@@ -27,12 +24,20 @@
     </header>
 
     <div class="container">
-        <form class="col s12">
+        <form>
             <div class="row">
                 <ul class="collapsible" data-collapsible="accordion">
                     <li>
-                        <div class="collapsible-header active"><i class="material-icons">filter_drama</i>API Setting</div>
+                        <div class="collapsible-header active">
+                            <i class="material-icons">settings</i> API Setting
+                            <i class="material-icons right">info</i>
+                        </div>
                         <div class="collapsible-body">
+                            <div class="row">
+                                <a class="card waves-effect waves-light btn" id="reset_Btn">
+                                    <i class="material-icons left">new_releases</i>ResetData
+                                </a>
+                            </div>
                             <div class="row">
                                 <div class="input-field col s4">
                                     <select id="serverurl">
@@ -41,8 +46,6 @@
                                     </select>
                                     <label for="serverurl">서버</label>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="input-field col s4">
                                     <select id="app_id">
                                       <option value="1000000001">DEA</option>
@@ -52,9 +55,6 @@
                                     </select>
                                     <label for="app_id">App 선택 :</label>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="input-field col s4">
                                     <select id="os">
                                       <option value="android">android</option>
@@ -72,9 +72,6 @@
                                     </select>
                                     <label for="c_ver">Ver 선택 :</label>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="input-field col s4">
                                     <select id="country">
                                       <option value="country_kr">kr</option>
@@ -82,9 +79,6 @@
                                     </select>
                                     <label for="country">Country 선택 :</label>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="input-field col s4">
                                     <select id="language">
                                       <option value="language_kr">kr</option>
@@ -103,40 +97,39 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="input-field col s4">
-                                    <select id="login_type">
-                                      <option value="Guest">Guest</option>
-                                      <option value="Email">Email</option>
-                                    </select>
-                                    <label for="login_type">로그인 선택 :</label>
-                                </div>
-                            </div>
-
-                            <div class="row" id="login_input">
-                                <div class="input-field col s4">
-                                    <input placeholder="이메일 아이디" id="email" type="text" class="validate">
-                                    <label class="active" for="email">Email ID :</label>
-                                </div>
-                                <div class="input-field col s4">
-                                    <input placeholder="비밀번호 6자리 이상" id="password" type="text" class="validate">
-                                    <label class="active" for="password">비밀번호 :</label>
-                                </div>
-                            </div>
                         </div>
                     </li>
                 </ul>
             </div>
 
+            <div class="row">
+                <div class="input-field col s4">
+                    <select id="login_AccountID">
+                      <option value="NewGuest">New Guest</option>
+                    </select>
+                    <label for="login_AccountID">AccountID 선택 :</label>
+                </div>
+
+                <div id="login_input">
+                    <div class="input-field col s4">
+                        <input placeholder="이메일 아이디" id="email" type="text" class="validate" readonly="readonly">
+                        <label class="active" for="email">Email ID :</label>
+                    </div>
+                    <div class="input-field col s4">
+                        <input placeholder="비밀번호 6자리 이상" id="password" type="text" class="validate" readonly="readonly">
+                        <label class="active" for="password">비밀번호 :</label>
+                    </div>
+                </div>
+            </div>
         </form>
 
         <div class="row">
             <div class="col s12">
                 <ul class="tabs">
-                    <li class="tab col s3"><a class="active" href="#login_tab">login</a></li>
+                    <li class="tab col s3"><a href="#login_tab" class="active">login</a></li>
                     <li class="tab col s3"><a href="#signup_tab">Sign Up</a></li>
-                    <!-- <li class="tab col s3"><a href="#test3">Disabled Tab</a></li>
-                    <li class="tab col s3"><a href="#test4">Test 4</a></li> -->
+                    <li class="tab col s3"><a href="#accountinfo_tab">Account Info</a></li>
+                    <!-- <li class="tab col s3"><a href="#test4">Test 4</a></li> -->
                 </ul>
             </div>
 
@@ -144,26 +137,30 @@
             </div>
             <div id="signup_tab" class="col s12">
             </div>
-            <!-- <div id="test3" class="col s12">Test 3</div>
-            <div id="test4" class="col s12">Test 4</div> -->
+            <div id="accountinfo_tab" class="col s12">
+            </div>
+            <!-- <div id="test4" class="col s12">Test 4</div> -->
         </div>
     </div>
 
-
-
-    <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 
-    <script type="text/javascript" src="js/ConstApi.js"></script>
-    <script type="text/javascript" src="js/ApiInfo.js"></script>
-    <script type="text/javascript" src="js/APIManager.js"></script>
-    <script type="text/javascript" src="js/AccountManager.js"></script>
-    <script type="text/javascript" src="js/DoraAPI.js"></script>
-    <script type="text/javascript" src="js/APIFlowController.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="js/signup.js"></script>
+    <script type="text/javascript" src="./js/ConstApi.js"></script>
+    <script type="text/javascript" src="./js/ApiData.js"></script>
+    <script type="text/javascript" src="./js/AccountData.js"></script>
+
+    <script type="text/javascript" src="./js/APIManager.js"></script>
+    <script type="text/javascript" src="./js/AccountManager.js"></script>
+    <script type="text/javascript" src="./js/DoraAPI.js"></script>
+    <script type="text/javascript" src="./js/FlowLoginAPICallController.js"></script>
+    <script type="text/javascript" src="./js/FlowSignupAPICallController.js"></script>
+    <script type="text/javascript" src="./js/FlowAccountInfoAPICallController.js"></script>
+
+    <script type="text/javascript" src="./js/Login.js"></script>
+    <script type="text/javascript" src="./js/Signup.js"></script>
+    <script type="text/javascript" src="./js/AccountInfo.js"></script>
+    <script type="text/javascript" src="./js/Main.js"></script>
 
     <script type="text/javascript">
         // select 태그 초기화.

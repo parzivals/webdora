@@ -1,4 +1,4 @@
-function ApiInfo() {
+function ApiData() {
     var apiUrl = "";
     var requestParamsAry = [];
     var resultParamsAry = [];
@@ -24,7 +24,7 @@ function ApiInfo() {
 
         // data.append( key, value );
       }
-
+      console.log( "params : " + this.requestValue );
       return this.requestValue ;
       // return data ;
     }

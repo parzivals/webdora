@@ -104,15 +104,12 @@ var TimeZone = (function () {
   };
 })();
 
-var LoginType = (function() {
-  var dicObj ={
-    Guest:"Guest",
-    Email:"Email"
-  };
+var AccountType = (function() {
+    var dicObj ={
+      NewGuest:"NewGuest"
+    };
     return {
       DIC:dicObj
-      // Guest:Guest,
-      // Email:Email
     };
 })();
 
@@ -192,19 +189,23 @@ var DLAAPIURL = (function() {
 })();
 
 
-// var PARAMETER = (function() {
-//       var app_id        = "app_id";
-//       var os            = "os";
-//       var email         = "email";
-//       var password      = "password";
-//       var country       = "country";
-//       var signup_path   = "signup_path";
-//       var client_uid    = "client_uid";
-//       var access_token  = "access_token";
-//       var language      = "language";
-//       var time_zone     = "time_zone";
-//
-//       return{
-//
-//       };
-// })();
+var Regex = (function () {
+  var regexEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+
+  function IsCheckPassword( pInputPassword ) {
+    if(pInputPassword.Length > 20 ){
+      return false;
+    }
+    else if(pInputPassword.Length < 6 ){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  return{
+    regexEmail:regexEmail,
+    IsCheckPassword:IsCheckPassword
+  };
+})();

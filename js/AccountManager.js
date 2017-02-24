@@ -1,103 +1,133 @@
 var AccountManager = (function() {
-    var app_id = localStorage.getItem("app_id");
-    var os = localStorage.getItem("os");
-    var c_ver = localStorage.getItem("c_ver");
-    var country = localStorage.getItem("country");
-    var language = localStorage.getItem("language");
-    var time_zone = localStorage.getItem("time_zone");
-    var login_type = localStorage.getItem("login_type");
+    var app_id = sessionStorage.getItem("app_id");
+    var os = sessionStorage.getItem("os");
+    var c_ver = sessionStorage.getItem("c_ver");
+    var country = sessionStorage.getItem("country");
+    var language = sessionStorage.getItem("language");
+    var time_zone = sessionStorage.getItem("time_zone");
 
-    var client_uid = localStorage.getItem("client_uid");
-    var guestid = localStorage.getItem("guestid");
-    var email = localStorage.getItem("email");
-    var password = localStorage.getItem("password");
-    var signup_path = localStorage.getItem("signup_path");
-    var account_id = localStorage.getItem("account_id");
-    var access_token = localStorage.getItem("access_token");
+    var account_id ;
+    var client_uid ;
+    var signup_path ;
+    var email ;
+    var password ;
+    var access_token ;
+
+    var loginAccount = new AccountData();//= sessionStorage.getItem("login_account");
+
+    var accountArray = JSON.parse( localStorage.getItem("accounts") ) || [];
 
     function ResetClientUid() {
-        localStorage.setItem("client_uid",
-            (function() {
+        var clientUid = (function() {
                 function s4() {
                     return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
                 }
                 return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-            })()
-        );
-        client_uid = localStorage.getItem("client_uid");
+            })();
+
+        return clientUid;
     }
 
     function GetAppID() {
-        app_id = localStorage.getItem("app_id");
+        app_id = sessionStorage.getItem("app_id");
         return app_id;
     }
 
     function GetOS() {
-        os = localStorage.getItem("os");
+        os = sessionStorage.getItem("os");
         return os;
     }
 
     function GetVer() {
-        c_ver = localStorage.getItem("c_ver");
+        c_ver = sessionStorage.getItem("c_ver");
         return c_ver;
     }
 
     function GetCountry() {
-        country = localStorage.getItem("country");
+        country = sessionStorage.getItem("country");
         return country;
     }
 
     function GetLanguage() {
-        language = localStorage.getItem("language");
+        language = sessionStorage.getItem("language");
         return language;
     }
 
     function GetTimeZone() {
-        time_zone = localStorage.getItem("time_zone");
+        time_zone = sessionStorage.getItem("time_zone");
         return time_zone;
     }
 
-    function GetLoginType() {
-        login_type = localStorage.getItem("login_type");
-        return login_type;
+    function GetAccountId() {
+      account_id = loginAccount.account_id;
+        return account_id;
     }
 
     function GetClientUid() {
-        if (!client_uid) {
-            var reset = new ResetClientUid();
-        }
-        client_uid = localStorage.getItem("client_uid");
+      client_uid = loginAccount.client_uid;
+        // if ( loginAccount.account_id == AccountType.DIC.NewGuest ) {
+        //     client_uid = ResetClientUid();
+        //     loginAccount.client_uid = client_uid ;
+        // }
         return client_uid;
     }
 
-    function GetGuestID() {
-        guestid = localStorage.getItem("guestid");
-        return guestid;
-    }
-
     function GetEMail() {
-        email = localStorage.getItem("email");
+        email = loginAccount.email;
+          if ( loginAccount.account_id == AccountType.DIC.NewGuest ) {
+              email = ResetClientUid() + "@guest.com";
+              loginAccount.email = email ;
+          }
         return email;
     }
 
     function GetPassWord() {
-        password = localStorage.getItem("password");
+        password = loginAccount.password;
+
+          if ( loginAccount.account_id == AccountType.DIC.NewGuest ) {
+              password = 123456;
+              loginAccount.password = password ;
+          }
+
         return password;
     }
 
     function GetSignupPath() {
-        signup_path = localStorage.getItem("signup_path");
+        signup_path = loginAccount.signup_path;
+
+          // if ( !loginAccount.account_id || loginAccount.account_id === AccountType.DIC.NewGuest ) {
+          //     signup_path = SignupPath.SLP ;
+          //     loginAccount.signup_path = signup_path ;
+          // }
         return signup_path;
     }
 
-    function GetAccountId() {
-        account_id = localStorage.getItem("account_id");
-        return account_id;
+    function GetAccessToken() {
+        access_token = loginAccount.access_token;
+        return access_token;
     }
 
-    function GetAccessToken() {
-        access_token = localStorage.getItem("access_token");
-        return access_token;
+    function GetLoginAccount() {
+        return loginAccount;
+    }
+
+    function GetAccounts() {
+      return accountArray;
+    }
+
+    function GetAccountById( _AccountId ) {
+      var accountObj ;
+      if ( Array.isArray(accountArray) && accountArray.length > 0) {
+        var tmp ;
+        for (var i = 0; i < accountArray.length; i++) {
+            tmp = accountArray[i] ;
+            if ( tmp.account_id == _AccountId ) {
+              accountObj = tmp;
+              break;
+            }
+        }
+      }
+      return accountObj ;
     }
 
     var dicObj = {
@@ -107,15 +137,13 @@ var AccountManager = (function() {
         country: GetCountry,
         language: GetLanguage,
         time_zone: GetTimeZone,
-        login_type: login_type,
 
+        account_id: GetAccountId,
         client_uid: GetClientUid,
-        guestid: GetGuestID,
         email: GetEMail,
         password: GetPassWord,
         signup_path: GetSignupPath,
-        account_id: GetAccountId,
-        access_token: GetAccessToken
+        access_token: GetAccessToken,
     };
 
     return {
@@ -129,6 +157,7 @@ var AccountManager = (function() {
         GetCountry: GetCountry,
         GetLanguage: GetLanguage,
         GetTimeZone: GetTimeZone,
+        GetLoginAccount:GetLoginAccount,
 
         GetClientUid: GetClientUid,
         GetEMail: GetEMail,
@@ -138,82 +167,127 @@ var AccountManager = (function() {
         GetAccessToken: GetAccessToken,
 
         SetAppID: function(_AppID) {
-            localStorage.setItem("app_id", _AppID);
-            app_id = localStorage.getItem("app_id");
+            sessionStorage.setItem("app_id", _AppID);
+            app_id = sessionStorage.getItem("app_id");
         },
         SetOS: function(_OS) {
-            localStorage.setItem("os", _OS);
-            os = localStorage.getItem("os");
+            sessionStorage.setItem("os", _OS);
+            os = sessionStorage.getItem("os");
         },
         SetVer: function(_Ver) {
-            localStorage.setItem("c_ver", _Ver);
-            c_ver = localStorage.getItem("c_ver");
+            sessionStorage.setItem("c_ver", _Ver);
+            c_ver = sessionStorage.getItem("c_ver");
         },
         SetCountry: function(_Country) {
-            localStorage.setItem("country", _Country);
-            country = localStorage.getItem("country");
+            sessionStorage.setItem("country", _Country);
+            country = sessionStorage.getItem("country");
         },
         SetLanguage: function(_Language) {
-            localStorage.setItem("language", _Language);
-            language = localStorage.getItem("language");
+            sessionStorage.setItem("language", _Language);
+            language = sessionStorage.getItem("language");
         },
         SetTimeZone: function(_TimeZone) {
-            localStorage.setItem("time_zone", _TimeZone);
-            time_zone = localStorage.getItem("time_zone");
+            sessionStorage.setItem("time_zone", _TimeZone);
+            time_zone = sessionStorage.getItem("time_zone");
         },
-        SetLoginType: function(_LoginType) {
-            localStorage.setItem("login_type", _LoginType);
-            login_type = localStorage.getItem("login_type");
+
+        SetLoginAccount: function( _AccountId ) {
+          loginAccount = GetAccountById(_AccountId);
+          
+          if ( !loginAccount ) {
+            loginAccount = new AccountData();
+            loginAccount.account_id = _AccountId;
+          }
+        },
+
+
+        GetAccounts:GetAccounts,
+        GetAccountById:GetAccountById,
+        GetAccountByIndex: function ( _Index ) {
+          return accountArray[_Index];
+        },
+        SaveAccount: function ( _AccountDataObj ) {
+          var acct = GetAccountById( _AccountDataObj.account_id ) ;
+          if (acct) {
+            acct = _AccountDataObj ;
+          }
+          else {
+            accountArray.push( _AccountDataObj );
+          }
+
+          localStorage.setItem("accounts", JSON.stringify(accountArray) );
+          accountArray = JSON.parse( localStorage.getItem("accounts"));
+
+          if ( loginAccount.account_id != AccountType.DIC.NewGuest ) {
+            loginAccount = GetAccountById( loginAccount.account_id );
+          }
+        },
+        RemoveAccountById: function ( _AccountId ) {
+          var index ;
+          for (var i = 0; i < accountArray.length; i++) {
+              if ( accountArray[i].account_id === _AccountId ) {
+                index = i;
+                break;
+              }
+          }
+          if (index) {
+            accountArray.splice( index, 1);
+            localStorage.setItem("accounts", JSON.stringify(accountArray) );
+            accountArray = JSON.parse( localStorage.getItem("accounts"));
+          }
+          else {
+            console.log( "remove Fail" );
+          }
         },
 
         ResetClientUid: ResetClientUid,
-        SetGuestID: function(_Guestid) {
-            localStorage.setItem("guestid", _Guestid);
-            guestid = localStorage.getItem("guestid");
-        },
+
         SetEMail: function(_email) {
-            localStorage.setItem("email", _email);
-            email = localStorage.getItem("email");
+            email = _email;
+            loginAccount.email = email;
         },
         SetPassWord: function(_pw) {
-            localStorage.setItem("password", _pw);
-            password = localStorage.getItem("password");
+            password = _pw ;
+            loginAccount.password = password;
         },
         SetSignupPath: function(_SignupPath) {
-            if ( _SignupPath === ''  ) {
+            if ( !_SignupPath  ) {
               _SignupPath = SignupPath.SLP;
             }
-            localStorage.setItem("signup_path", _SignupPath);
-            signup_path = localStorage.getItem("signup_path");
+            signup_path = _SignupPath;
+            loginAccount.signup_path = signup_path ;
         },
         SetAccountId: function( _Account_id) {
-            localStorage.setItem("account_id", _Account_id);
-            account_id = localStorage.getItem("account_id");
+            account_id = _Account_id;
+            loginAccount.account_id = account_id;
         },
         SetAccessToken: function(_AccessToken) {
-            localStorage.setItem("access_token", _AccessToken);
-            access_token = localStorage.getItem("access_token");
+            access_token = _AccessToken;
+            loginAccount.access_token = access_token;
         },
 
 
         ClearData: function() {
+            sessionStorage.clear();
+            app_id = sessionStorage.getItem("app_id");
+            os = sessionStorage.getItem("os");
+            c_ver = sessionStorage.getItem("c_ver");
+            country = sessionStorage.getItem("country");
+            language = sessionStorage.getItem("language");
+            time_zone = sessionStorage.getItem("time_zone");
+
+            // loginAccount = sessionStorage.getItem("login_account");
+
+
             localStorage.clear();
-
-            app_id = localStorage.getItem("app_id");
-            os = localStorage.getItem("os");
-            c_ver = localStorage.getItem("c_ver");
-            country = localStorage.getItem("country");
-            language = localStorage.getItem("language");
-            time_zone = localStorage.getItem("time_zone");
-            login_type = localStorage.getItem("login_type");
-
-            client_uid = localStorage.getItem("client_uid");
-            guestid = localStorage.getItem("guestid");
-            email = localStorage.getItem("email");
-            password = localStorage.getItem("password");
-            signup_path = localStorage.getItem("signup_path");
-            account_id = localStorage.getItem("account_id");
-            access_token = localStorage.getItem("access_token");
+            accountArray = JSON.parse( localStorage.getItem("accounts") ) || [];
+            // client_uid = localStorage.getItem("client_uid");
+            // guestid = localStorage.getItem("guestid");
+            // email = localStorage.getItem("email");
+            // password = localStorage.getItem("password");
+            // signup_path = localStorage.getItem("signup_path");
+            // account_id = localStorage.getItem("account_id");
+            // access_token = localStorage.getItem("access_token");
         }
     };
 })();

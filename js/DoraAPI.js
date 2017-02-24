@@ -4,8 +4,6 @@ var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
     var url = _Url;
     var params = _Params;
     var ApiCall = function RequestAPI() {
-        // var url = "http://apiDEV.doralab.co.kr/slp.auth.app";
-        // var params = "&app_id=1000000003&os=android&client_uid=165bae977e1d63d89865d55b253fee6e70d62032";
 
         if (window.XMLHttpRequest) { // Mozilla, Safari, ...
             httpRequest = new XMLHttpRequest();

@@ -1,32 +1,26 @@
 
-(function () {
-    var signup_link = document.getElementById("signup_link");
-    var signupHtmlFile = signup_link.import.getElementById('signup_page');
-    var signup_tab = document.getElementById("signup_tab");
-    signup_tab.appendChild(signupHtmlFile.cloneNode(true) );
-})();
-
-
 var SignupObjs = function() {
-  var eMainIDInput = document.getElementById("new_email");
+  var eMailIDInput = document.getElementById("new_email");
   var passwordInput = document.getElementById("new_password");
-  var logout = document.getElementById("logout");
 
-  var logout_proc = document.getElementById("logout_proc");
-  var logout_log = document.getElementById("logout_log");
+  var signup_btn = document.getElementById("signup_btn");
 
-  var signup_log = document.getElementById("signup_log");
+  var transition_proc = document.getElementById("transition_proc");
+  var transition_log = document.getElementById("transition_log");
+
+  var signin_proc = document.getElementById("signin_proc");
   var signin_log = document.getElementById("signin_log");
 
   return {
-      eMainIDInput: eMainIDInput,
+      eMailIDInput: eMailIDInput,
       passwordInput:passwordInput,
-      logout:logout,
 
-      logout_proc:logout_proc,
-      logout_log:logout_log,
+      signup_btn:signup_btn,
 
-      signup_log:signup_log,
+      transition_proc:transition_proc,
+      transition_log:transition_log,
+
+      signin_proc:signin_proc,
       signin_log:signin_log
   };
 };
