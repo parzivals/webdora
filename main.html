@@ -40,60 +40,67 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s4">
-                                    <select id="serverurl">
+                                    <h6 class="center-align">서버</h6>
+                                    <select class="browser-default" id="serverurl">
                                       <option value="dev">DEV</option>
                                       <option value="live">LIVE</option>
                                     </select>
-                                    <label for="serverurl">서버</label>
+                                    <!-- <label for="serverurl">서버</label> -->
                                 </div>
                                 <div class="input-field col s4">
-                                    <select id="app_id">
+                                    <h6 class="center-align">App 선택 :</h6>
+                                    <select class="browser-default" id="app_id">
                                       <option value="1000000001">DEA</option>
                                       <option value="1000000003">LWD1</option>
                                       <option value="1000000004">LWD2</option>
                                       <option value="1000000005">LWD3</option>
                                     </select>
-                                    <label for="app_id">App 선택 :</label>
+                                    <!-- <label for="app_id">App 선택 :</label> -->
                                 </div>
                                 <div class="input-field col s4">
-                                    <select id="os">
+                                    <h6 class="center-align">OS 선택 :</h6>
+                                    <select class="browser-default" id="os">
                                       <option value="android">android</option>
                                       <option value="ios">ios</option>
                                     </select>
-                                    <label for="os">OS 선택 :</label>
+                                    <!-- <label for="os">OS 선택 :</label> -->
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s4">
-                                    <select id="c_ver">
+                                    <h6 class="center-align">Ver 선택 :</h6>
+                                    <select class="browser-default" id="c_ver">
                                       <option value="2.5.1">2.5.1</option>
                                       <option value="2.5.0">2.5.0</option>
                                     </select>
-                                    <label for="c_ver">Ver 선택 :</label>
+                                    <!-- <label for="c_ver">Ver 선택 :</label> -->
                                 </div>
                                 <div class="input-field col s4">
-                                    <select id="country">
+                                    <h6 class="center-align">Country 선택 :</h6>
+                                    <select class="browser-default" id="country">
                                       <option value="country_kr">kr</option>
                                       <option value="country_en">en</option>
                                     </select>
-                                    <label for="country">Country 선택 :</label>
+                                    <!-- <label for="country">Country 선택 :</label> -->
                                 </div>
                                 <div class="input-field col s4">
-                                    <select id="language">
+                                    <h6 class="center-align">Language 선택 :</h6>
+                                    <select class="browser-default" id="language">
                                       <option value="language_kr">kr</option>
                                       <option value="language_en">en</option>
                                     </select>
-                                    <label for="language">Language 선택 :</label>
+                                    <!-- <label for="language">Language 선택 :</label> -->
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s4">
-                                    <select id="time_zone">
+                                    <h6 class="center-align">time_zone 선택 :</h6>
+                                    <select class="browser-default" id="time_zone">
                                       <option value="Asia/Seoul">Asia/Seoul</option>
                                     </select>
-                                    <label for="time_zone">time_zone 선택 :</label>
+                                    <!-- <label for="time_zone">time_zone 선택 :</label> -->
                                 </div>
                             </div>
 
@@ -103,43 +110,106 @@
             </div>
 
             <div class="row">
-                <div class="input-field col s4">
-                    <select id="login_AccountID">
+                <div class="col s12">
+                    <div class="input-field col s4">
+                        <h6 class="center-align">AccountID 선택 :</h6>
+                        <select class="browser-default" id="login_AccountID">
                       <option value="NewGuest">New Guest</option>
                     </select>
-                    <label for="login_AccountID">AccountID 선택 :</label>
-                </div>
-
-                <div id="login_input">
-                    <div class="input-field col s4">
-                        <input placeholder="이메일 아이디" id="email" type="text" class="validate" readonly="readonly">
-                        <label class="active" for="email">Email ID :</label>
+                        <!-- <label for="login_AccountID">AccountID 선택 :</label> -->
                     </div>
-                    <div class="input-field col s4">
-                        <input placeholder="비밀번호 6자리 이상" id="password" type="text" class="validate" readonly="readonly">
-                        <label class="active" for="password">비밀번호 :</label>
+
+                    <div id="login_input">
+                        <div class="input-field col s4">
+                            <input placeholder="이메일 아이디" id="email" type="text" class="validate" readonly="readonly">
+                            <label class="active" for="email">Email ID :</label>
+                        </div>
+                        <div class="input-field col s4">
+                            <input placeholder="비밀번호 6자리 이상" id="password" type="text" class="validate" readonly="readonly">
+                            <label class="active" for="password">비밀번호 :</label>
+                        </div>
                     </div>
                 </div>
             </div>
         </form>
 
-        <div class="row">
-            <div class="col s12">
-                <ul class="tabs">
-                    <li class="tab col s3"><a href="#login_tab" class="active">login</a></li>
-                    <li class="tab col s3"><a href="#signup_tab">Sign Up</a></li>
-                    <li class="tab col s3"><a href="#accountinfo_tab">Account Info</a></li>
-                    <!-- <li class="tab col s3"><a href="#test4">Test 4</a></li> -->
-                </ul>
+        <!-- profile -->
+        <div class="row" hidden>
+
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="#">
+                        <span class="card-title">Card Title</span>
+                    </div>
+                    <div class="card-content">
+                        <p>doraa</p>
+                        <p>생일</p>
+                        <p>성별</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">수정</a>
+                        <a href="#">삭제</a>
+                    </div>
+                </div>
             </div>
 
-            <div id="login_tab" class="col s12">
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="#">
+                        <span class="card-title">Card Title</span>
+                    </div>
+                    <div class="card-content">
+                        <p>boots</p>
+                        <p>생일</p>
+                        <p>성별</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">수정</a>
+                        <a href="#">삭제</a>
+                    </div>
+                </div>
             </div>
-            <div id="signup_tab" class="col s12">
+
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="#">
+                        <span class="card-title">Card Title</span>
+                    </div>
+                    <div class="card-content">
+                        <p>benny</p>
+                        <p>생일</p>
+                        <p>성별</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">수정</a>
+                        <a href="#">삭제</a>
+                    </div>
+                </div>
             </div>
-            <div id="accountinfo_tab" class="col s12">
+        </div>
+
+
+
+
+
+        <div class="row">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#login_tab" class="active">login</a></li>
+                <li class="tab col s3"><a href="#signup_tab">Sign Up</a></li>
+                <li class="tab col s3"><a href="#accountinfo_tab">Account Info</a></li>
+                <li class="tab col s3"><a href="#test4">Test 4</a></li>
+            </ul>
+
+            <div id="login_tab">
             </div>
-            <!-- <div id="test4" class="col s12">Test 4</div> -->
+            <div id="signup_tab">
+            </div>
+            <div id="accountinfo_tab">
+            </div>
+            <div id="test4">Test 4</div>
         </div>
     </div>
 
@@ -149,9 +219,12 @@
     <script type="text/javascript" src="./js/ConstApi.js"></script>
     <script type="text/javascript" src="./js/ApiData.js"></script>
     <script type="text/javascript" src="./js/AccountData.js"></script>
+    <script type="text/javascript" src="./js/ProfileData.js"></script>
 
     <script type="text/javascript" src="./js/APIManager.js"></script>
     <script type="text/javascript" src="./js/AccountManager.js"></script>
+    <script type="text/javascript" src="./js/ProfileManager.js"></script>
+
     <script type="text/javascript" src="./js/DoraAPI.js"></script>
     <script type="text/javascript" src="./js/FlowLoginAPICallController.js"></script>
     <script type="text/javascript" src="./js/FlowSignupAPICallController.js"></script>

@@ -15,8 +15,6 @@ function ApiData() {
     function GetRequestValue() {
       this.requestValue = "";
 
-      // var data = new FormData();
-
       for (var i = 0; i < this.requestParamsAry.length; i++) {
         var key = this.requestParamsAry[i];
         var value = AccountManager.GetAPIDIC()[key]();
@@ -30,6 +28,7 @@ function ApiData() {
     }
 
     function GetResultValue() {
+
       return this.resultValue ;
     }
 

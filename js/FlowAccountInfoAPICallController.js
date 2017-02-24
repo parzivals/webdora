@@ -48,6 +48,10 @@ function FlowAccountInfoAPICallController() {
           if (jsonObj.res == '0') {
             $accountInfo_Proc.css("background-color","#2196f3");
 
+            ProfileManager.SetProfileArry( jsonObj.pf_list );
+
+            console.log( ProfileManager.GetCurrentProfile() );
+
             apiMyPoint.RequestAPI(ResultMyPoint);
             return;
           }
