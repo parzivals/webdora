@@ -3,10 +3,6 @@ function FlowSignupAPICallController() {
     var apiLogin = APIManager.Login;
 
     var loginAccount = AccountManager.GetLoginAccount();
-        console.log(loginAccount);
-
-    var apiStartTime ;
-    var apiEndTime ;
 
     $(SignupObjs.transition_proc).css("background-color","");
     $(SignupObjs.signin_proc).css("background-color","");
@@ -26,7 +22,6 @@ function FlowSignupAPICallController() {
     }
     else {
           $(SignupObjs.transition_proc).css("background-color","#a5d6a7");
-          apiStartTime = new Date();
 
           AccountManager.SetEMail( SignupObjs.eMailIDInput.value );
           AccountManager.SetPassWord( SignupObjs.passwordInput.value );
@@ -35,16 +30,13 @@ function FlowSignupAPICallController() {
     }
 
     // signup_path api 결과
-    function ResultAccountTransition(txt) {
-      apiEndTime = new Date();
-      var TimeGap = apiEndTime.getMilliseconds() - apiStartTime.getMilliseconds();
-        apiAccountTransition.resultValue = txt;
-        SignupObjs.transition_log.innerText = TimeGap + "ms\r\n"+ txt;
+    function ResultAccountTransition() {
 
         if (JSON) {
-          var jsonObj = JSON.parse( txt );
-          if (jsonObj.res == '0') {
+          var jsonObj = apiAccountTransition.resultValue;
+          SignupObjs.transition_log.innerHTML = apiAccountTransition.resultHtml;
 
+          if (jsonObj.res == '0') {
             loginAccount.isGuest = false;
             AccountManager.SetAccountId(jsonObj.account_id);
             AccountManager.SaveAccount( loginAccount );
@@ -52,33 +44,29 @@ function FlowSignupAPICallController() {
 
             // login
             $(SignupObjs.signin_proc).css("background-color","#a5d6a7");
-            apiStartTime = new Date();
             apiLogin.RequestAPI(ResultSignIn);
 
             return;
           }
           else if (jsonObj.res == '-200001' ) {
+            SignupObjs.transition_log.innerText = apiAccountTransition.resultHtml;
             alert("중복된 이메일 입니다.");
           }
         }
+        else {
+          SignupObjs.transition_log.innerText = apiAccountTransition.resultHtml;
+        }
+
         // error
         $(SignupObjs.transition_proc).css("background-color","#f44336");
+        RefreshUIAccountData();
     }
 
     // login(signin) api 결과
-    function ResultSignIn(txt) {
-      apiEndTime = new Date();
-      var TimeGap = apiEndTime.getMilliseconds() - apiStartTime.getMilliseconds();
-
-        apiLogin.resultValue = txt;
-        SignupObjs.signin_log.innerText = TimeGap + "ms\r\n"+ txt;
-
-        (function(){
-          $('.collapsible').collapsible();
-        })();
-
+    function ResultSignIn() {
         if (JSON) {
-          var jsonObj = JSON.parse( txt );
+          var jsonObj = apiLogin.resultValue;
+          SignupObjs.signin_log.innerHTML = apiLogin.resultHtml;
 
           if (jsonObj.res == '0') {
             $(SignupObjs.signin_proc).css("background-color","#2196f3");
@@ -90,7 +78,11 @@ function FlowSignupAPICallController() {
             return;
           }
         }
+        else {
+          SignupObjs.signin_log.innerText = apiLogin.resultHtml;
+        }
         // error
         $(SignupObjs.signin_proc).css("background-color","#f44336");
+        RefreshUIAccountData();
     }
 }

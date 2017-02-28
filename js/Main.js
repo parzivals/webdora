@@ -19,6 +19,18 @@ $(document).ready(function() {
             var flowAccountInfo = new FlowAccountInfoAPICallController();
         };
     });
+
+    $("#ui_profile").load("profile.html", function() {
+        ProfileObjs = new ProfileObjs();
+        // ProfileObjs.accountInfoBtn.onclick = function() {
+        //     var flowAccountInfo = new FlowAccountInfoAPICallController();
+        // };
+        // var cards = $("#ui_profile #first > .card-content");
+        //   console.log( cards.html() );
+    });
+
+    // select 태그 초기화.
+    $('select').material_select();
 });
 
 window.onload = Init;
@@ -133,8 +145,6 @@ function Main() {
     // dom 노드 리프레시
     RefreshAPIInfo();
 
-    $('.collapsible').collapsible(); // collapsible 초기화
-
     // select 구성.
     function AddSelectorOptions(parentObj, dicObj) {
         var op;
@@ -199,10 +209,8 @@ function RefreshAPIInfo() {
         MainObjs.passwordInput.value = AccountManager.GetPassWord();
     }
 
-    (function() {
-        $('select').material_select();
-    })();
-
+    $('.collapsible').collapsible(); // collapsible 초기화
+    $('select').material_select();
 }
 
 function RefreshUIAccountData() {

@@ -1,8 +1,9 @@
-var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
+var BaeApi = function DoraApi( _ResultObj ) {
 
     var httpRequest;
-    var url = _Url;
-    var params = _Params;
+    var url = _ResultObj.GetAPIUrl();
+    var params = _ResultObj.GetRequestValue();
+
     var ApiCall = function RequestAPI() {
 
         if (window.XMLHttpRequest) { // Mozilla, Safari, ...
@@ -31,8 +32,8 @@ var BaeApi = function DoraApi(_Url, _Params, resultCallBack) {
                 var txt = httpRequest.responseText;
                 console.log(txt);
                 //         //txt를 사용해서 알맞은 작업 수행
-                if ( typeof resultCallBack === 'function' ) {
-                    resultCallBack(txt);
+                if ( typeof _ResultObj.APIResultCallBack === 'function' ) {
+                    _ResultObj.APIResultCallBack(txt);
                 }
 
             } else {

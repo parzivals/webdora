@@ -1,9 +1,6 @@
 function FlowAccountInfoAPICallController() {
     var loginAccount = AccountManager.GetLoginAccount();
 
-    var apiStartTime ;
-    var apiEndTime ;
-
     // api list
     var apiAccountInfo = APIManager.AccountInfo;
     var apiMyPoint = APIManager.MyPoint;
@@ -31,72 +28,75 @@ function FlowAccountInfoAPICallController() {
 
     (function StartFlowApi() {
           $accountInfo_Proc.css("background-color","#a5d6a7");
-          apiStartTime = new Date();
-
           apiAccountInfo.RequestAPI(ResultAccountInfo);
     })();
 
     // accountInfo api 결과
-    function ResultAccountInfo(txt) {
-        apiEndTime = new Date();
-        var TimeGap = apiEndTime.getMilliseconds() - apiStartTime.getMilliseconds();
-        apiAccountInfo.resultValue = txt;
-        accountInfo_Log.innerText = TimeGap + "ms\r\n"+ txt ;
-
+    function ResultAccountInfo() {
         if (JSON) {
-          var jsonObj = JSON.parse( txt );
-          if (jsonObj.res == '0') {
+          var jsonObj = apiAccountInfo.resultValue;
+          accountInfo_Log.innerHTML = apiAccountInfo.resultHtml ;
+
+          if ( apiAccountInfo.resultValue.res == '0') {
             $accountInfo_Proc.css("background-color","#2196f3");
-
             ProfileManager.SetProfileArry( jsonObj.pf_list );
+            // refresh profile
 
-            console.log( ProfileManager.GetCurrentProfile() );
-
+            $myPoint_Proc.css("background-color","#a5d6a7");
             apiMyPoint.RequestAPI(ResultMyPoint);
             return;
           }
         }
+        else {
+          accountInfo_Log.innerText = apiAccountInfo.resultHtml ;
+        }
         // error
       $accountInfo_Proc.css("background-color","#f44336");
+      RefreshUIAccountData();
     }
 
     // my point api 결과
-    function ResultMyPoint(txt) {
-        apiEndTime = new Date();
-        var TimeGap = apiEndTime.getMilliseconds() - apiStartTime.getMilliseconds();
-        apiMyPoint.resultValue = txt;
-
-        myPoint_Log.innerText = TimeGap + "ms\r\n"+ txt ;
-
+    function ResultMyPoint() {
         if (JSON) {
-          var jsonObj = JSON.parse( txt );
+          var jsonObj = apiMyPoint.resultValue;
+          myPoint_Log.innerHTML = apiMyPoint.resultHtml;
+
           if (jsonObj.res == '0') {
+            // save point
             $myPoint_Proc.css("background-color","#2196f3");
 
+            $buyHistory_Proc.css("background-color","#a5d6a7");
             apiBuyHistory.RequestAPI(ResultBuyHistory);
             return;
           }
         }
+        else {
+          myPoint_Log.innerText = apiMyPoint.resultHtml;
+        }
         // error
       $myPoint_Proc.css("background-color","#f44336");
+      RefreshUIAccountData();
     }
 
     // buy history api 결과
     function ResultBuyHistory(txt) {
-        apiEndTime = new Date();
-        var TimeGap = apiEndTime.getMilliseconds() - apiStartTime.getMilliseconds();
-        apiBuyHistory.resultValue = txt;
-
-        buyHistory_Log.innerText = TimeGap + "ms\r\n"+ txt ;
-
         if (JSON) {
-          var jsonObj = JSON.parse( txt );
+          var jsonObj = apiBuyHistory.resultValue;
+          buyHistory_Log.innerHTML = apiBuyHistory.resultHtml;
+
           if (jsonObj.res == '0') {
+            // save buy history
+
             $buyHistory_Proc.css("background-color","#2196f3");
+            RefreshUIAccountData();
             return;
           }
         }
+        else {
+          buyHistory_Log.innerText = apiBuyHistory.resultHtml;
+        }
         // error
       $buyHistory_Proc.css("background-color","#f44336");
+      RefreshUIAccountData();
     }
 }
